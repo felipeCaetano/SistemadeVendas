@@ -7,10 +7,10 @@ Modulos até agora criados:
 <a href="clientes.py">Clientes</a>:
   >Adiciona funcionários, clientes e fornecedores
 
-Produtos:
+<a href="produtos.py">Produtos</a>:
   >Adiciona Categorias, Subcategorias e Produtos
   
-Estoque:
+<a href="Estoque.py">Estoque</a>:
   >modulo para controle de estoque, cadastro e manutenção de produtos, categorias e subcategorias
   
   
