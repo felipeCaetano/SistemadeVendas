@@ -4,7 +4,7 @@ Arquivos do Sistema de Vendas - Introdução a programação BSI2016.2
 
 Modulos até agora criados:
 
-Clientes:
+<a href="clientes.py">Clientes</a>:
   >Adiciona funcionários, clientes e fornecedores
 
 Produtos:
