@@ -1,4 +1,4 @@
-from produtos import *
+from src.produtos import *
 
 
 class Estoque(object):
@@ -59,7 +59,65 @@ class Estoque(object):
             self.subcategorias.append(subcategoria)
 
     def create_produto(self):
-        pass
+        """"
+        Cria produto a ser controlado pelo estoque. Um produto deve pertencer a uma subcategoria.
+        Produtos são itens que podem ser vendidos.
+        Possuem subcategoria, codigo, nome, descricao, estoquemax, estoquemin, valorvenda, valorcompra, foto
+
+        TODELETE: Por enquanto foto recebe uma string qualquer
+
+        """
+        # TODO: Implementar a foto no sistemas
+        if not len(self.subcategorias):
+            print("Produto deve ter CATEGORIA ou uma SUBCATEGORIA!\n")
+            self.create_subcategoria()
+        else:
+            print("- Cadastrar PRODUTO -")
+            escolhe = input("SUBCATEGORIA (Nome ou Código): ").lower()
+            codigo = input("CÓDIGO: ").strip()
+            nome = input("NOME: ").strip()
+            descrição = input("DESCRIÇÃO: ").strip()
+
+            estoquemax = input("Quantidade Maxima em Estoque: ")
+            while not produtos.valida_estoque(estoquemax):
+                print("Valor Inválido!")
+                estoquemax = input("Valor deve ser Numérico: ")
+
+            estoquemin = input("Quantidade Minima em Estoque: ")
+            while not produtos.valida_estoque(estoquemin):
+                print("Valor Inválido!")
+                estoquemin = input("Valor deve ser Numérico: ")
+
+            valorvenda = input("Preço Unitário: ")
+            while not produtos.valida_valorvenda(valorvenda):
+                print("Valor Inválido!")
+                estoquemax = input("Valor deve ser Numérico: ")
+
+            valorcompra = input("Valor de Compra: ")
+            while not produtos.valida_valorvenda(valorcompra):
+                print("Valor Inválido!")
+                estoquemax = input("Valor deve ser Numérico: ")
+
+            foto = input("Arquivo de foto: ")
+
+            subcategoria = 0
+
+        for scat in self.subcategorias:
+            if scat.nome.lower() == escolhe or scat.codigo == escolhe:
+                subcategoria = scat
+                break
+            else:
+                print("Subcategoria não Encontrada!\nDeseja criar uma SUBCATEGORIA?\n1- Sim\n2 - Não")
+                choice = input()
+                if choice.lower() == 's' or choice == '1':
+                    self.create_subcategoria()
+                else:
+                    self.create_produto()
+
+            produto = Produtos( subcategoria, codigo, nome, descricao, estoquemax, estoquemin, valorvenda, valorcompra, foto)
+
+        if produto not in self.produtos:
+            self.produtos.append(produto)
 
     # funcionalidade pedida na especificação
 
@@ -68,13 +126,23 @@ class Estoque(object):
 
     def consulta_estoque(self):    # exibe itens disponiveis no estoque
         print("Exibindo estoque")
-        for categoria in self.categorias:
-            print(categoria, end=" ")
+        if not len(self.categorias):
+            print("Não há Categorias Registrados!")
+        else:
+            for categoria in self.categorias:
+                print(categoria, end=" ")
         print()
-        for subcategoria in self.subcategorias:
-            print(subcategoria, end=" ")
+        if not len(self.subcategorias):
+            print("Não há Subcategorias Registradas!")
+        else:
+            for subcategoria in self.subcategorias:
+                print(subcategoria, end=" ")
         print()
-        print(self.produtos)
+        if not len(self.produtos):
+            print("Não há Produtos Registrados!")
+        else:
+            for produto in self.produtos:
+                print(produto, end=" ")
 
         self.menu_estoque()
 
